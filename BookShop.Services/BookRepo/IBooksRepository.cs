@@ -9,6 +9,7 @@ namespace BookShop.Services.BookRepo
 {
     public interface IBooksRepository
     {
-        public ICollection<Book> GetAllBooks(BooksQueryParameters queryParameters);
+        public ICollection<Book> GetBooks(BooksQueryParameters queryParameters);
+        public Boolean InsertBook(Book book);
     }
 }

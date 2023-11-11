@@ -16,9 +16,15 @@ namespace BookShop.Controllers
             _bookRepository = bookRepository;
         }
         [HttpGet]
-        public IActionResult GetAllBooks([FromQuery] BooksQueryParameters queryParameters)
+        public IActionResult GetBooks([FromQuery] BooksQueryParameters queryParameters)
         {
-            return Ok(_bookRepository.GetAllBooks(queryParameters));
+            return Ok(_bookRepository.GetBooks(queryParameters));
+        }
+        [HttpPost]
+        public IActionResult InsertBook(Book book)//use automappers
+        {
+            var insertBook=_bookRepository.InsertBook(book);
+            return Ok(insertBook);
         }
     }
 }
