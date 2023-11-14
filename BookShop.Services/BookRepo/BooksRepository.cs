@@ -53,13 +53,17 @@ namespace BookShop.Services.BookRepo
                 books = books.Where(b => b.Name.ToLower().Contains(queryParameters.SearchTerm));
             }
 
-
             var allBooks = books.ToList();
             if (allBooks.Count != 0)
                 return allBooks;
-            throw new InvalidOperationException("No books found.");
+            return new List<Book>();
         }
-
+        public Book GetBook(int Id) {
+            var book=_context.books.Where(b=>b.Id == Id).FirstOrDefault();
+            if (book != null)
+                return book;
+            return new Book();
+        }
         public Boolean InsertBook(Book book)
         {
             if (book != null)
@@ -69,6 +73,28 @@ namespace BookShop.Services.BookRepo
                 return true;
             }
             return false;
+        }
+
+        public Boolean DeleteBook(int Id)
+        {
+            var book=_context.books.Where(b=>b.Id==Id).FirstOrDefault();
+            if (book != null)
+            {
+                _context.books.Remove(book);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public Book UpdateBook(Book book)
+        {
+            if (book != null)
+            {
+                _context.books.Update(book);
+                _context.SaveChanges();
+                return GetBook(book.Id);
+            }
+            return new Book();
         }
     }
 }

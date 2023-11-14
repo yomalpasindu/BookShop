@@ -1,0 +1,4 @@
+issues
+
+01. when view books, categories & authors are not visible. only get empty brackets. - ask from fiqri. if not answer, ask from C# commiunity 
+02. application crash when invalid page number adding to books query parameters
